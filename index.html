@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Private Love Chat</title>
+
+<!-- PWA Manifest -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ff4da6">
+
+<!-- تصميم الشات -->
+<link rel="stylesheet" href="style.css">
+
+<!-- مكتبة Socket.io -->
+<script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+
+<!-- صفحة تسجيل الدخول -->
+<div class="login" id="login">
+  <h2>💬 Private Chat</h2>
+  <input id="username" placeholder="اسمك">
+  <button onclick="joinChat()">دخول</button>
+</div>
+
+<!-- صفحة الشات -->
+<div class="chat" id="chat">
+  <div class="header">
+    <span>💻 Chat Room</span>
+    <span class="status">● Online</span>
+  </div>
+
+  <div class="messages" id="messages"></div>
+  <div class="typing" id="typing"></div>
+
+  <div class="input-box">
+    <input id="msg" placeholder="اكتب رسالتك..." oninput="typing()">
+    <input type="file" id="image" accept="image/*">
+    <button onclick="send()">➤</button>
+    <button onclick="addEmoji('😍')">😍</button>
+    <button onclick="addEmoji('😂')">😂</button>
+    <button onclick="addEmoji('💖')">💖</button>
+  </div>
+</div>
+
+<!-- سكربت الشات -->
+<script src="script.js"></script>
+
+<!-- تسجيل Service Worker لتثبيت PWA -->
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js')
+    .then(() => console.log('✅ Service Worker Registered'))
+    .catch(err => console.log('❌ Service Worker Failed', err));
+}
+</script>
+
+</body>
+</html>
